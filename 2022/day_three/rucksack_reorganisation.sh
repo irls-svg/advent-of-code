@@ -11,11 +11,11 @@ get_priority() {
 
     asc=$( printf "%d" "'$val" )
 
-    case "$val" in
-        [a-z]) echo "$((asc - 96))" ;;
-        [A-Z]) echo "$((asc - 38))" ;;
-        *)     echo "err" ;;
-    esac
+    if [[ $asc -ge 97 ]]; then
+        echo "$((asc - 96))"
+    elif [[ $asc -ge 65 ]]; then
+        echo "$((asc - 38))"
+    fi
 }
 
 part_one() {
@@ -51,7 +51,7 @@ part_two() {
 }
 
 main() {
-    input=( $(cat input.txt) )
+    input=( $(cat "$(dirname "$0")/input.txt") )
     echo "Part one: $(part_one)"
     echo "Part two: $(part_two)"
 }
